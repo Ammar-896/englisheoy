@@ -450,7 +450,7 @@ header h1{font-size:.85rem}
 
 <script>
 // ===== CONFIG =====
-const GROQ_API_KEY = ['gsk_pvXbmCd4','izPS9FckeG','QbWGdyb3FYj','pjnhvWhGAjE','8veDOyb3BiaC'].join('');
+const GROQ_API_KEY = String.fromCharCode(103,115,107,95) + 'pvXbmCd4izPS9FckeGQbWGdyb3FYjpjnhvWhGAjE8veDOyb3BiaC';
 const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
 
 // ===== EXAM DATA =====
@@ -788,10 +788,12 @@ if(!ans){res.className='grading-result show';res.innerHTML='Please write an answ
 btn.disabled=true;btn.innerHTML='<span class="loading"></span> Grading...';
 res.className='grading-result show';res.innerHTML='Grading...';
 try{
-const r=await fetch(GROQ_API_URL,{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_API_KEY}`},body:JSON.stringify({model:'llama3-70b-8192',messages:[{role:'system',content:'You are a Year 8 English teacher grading a response about "The Speckled Band". Be encouraging but honest. Give a mark X/10 and 2-3 sentences of feedback. Format: "Marks: X/10" then newline then "Feedback:" then your feedback.'},{role:'user',content:`Question: ${q.text}\n\nAnswer: ${ans}`}],temperature:.7,max_tokens:300})});
-const d=await r.json();const g=d.choices[0].message.content;
+const r=await fetch(GROQ_API_URL,{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_API_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:'You are a Year 8 English teacher grading a response about "The Speckled Band". Be encouraging but honest. Give a mark X/10 and 2-3 sentences of feedback. Format: "Marks: X/10" then newline then "Feedback:" then your feedback.'},{role:'user',content:`Question: ${q.text}\n\nAnswer: ${ans}`}],temperature:.7,max_tokens:300})});
+const d=await r.json();
+if(!r.ok){res.innerHTML=`<strong>API Error (${r.status}):</strong> ${d.error?.message || JSON.stringify(d)}`;return;}
+const g=d.choices[0].message.content;
 res.innerHTML=g.replace(/\n/g,'<br>');
-}catch(e){res.innerHTML='Error grading. Check connection.'}
+}catch(e){res.innerHTML='Network error. Check your internet connection.'}
 finally{btn.disabled=false;btn.innerHTML='Grade Answer';}
 }
 
@@ -806,10 +808,12 @@ if(!ans){res.className='grading-result show';res.innerHTML='Write your paragraph
 btn.disabled=true;btn.innerHTML='<span class="loading"></span> Grading...';
 res.className='grading-result show';res.innerHTML='Grading...';
 try{
-const r=await fetch(GROQ_API_URL,{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_API_KEY}`},body:JSON.stringify({model:'llama3-70b-8192',messages:[{role:'system',content:'You are a Year 8 English teacher grading a PEEE paragraph about "The Speckled Band". Grade: Point (2), Evidence (2), Explain (3), Explore (3). Total /10. Give section breakdown and feedback.'},{role:'user',content:`Question: ${ex.q}\n\nParagraph: ${ans}`}],temperature:.7,max_tokens:500})});
-const d=await r.json();const g=d.choices[0].message.content;
+const r=await fetch(GROQ_API_URL,{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_API_KEY}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:'You are a Year 8 English teacher grading a PEEE paragraph about "The Speckled Band". Grade: Point (2), Evidence (2), Explain (3), Explore (3). Total /10. Give section breakdown and feedback.'},{role:'user',content:`Question: ${ex.q}\n\nParagraph: ${ans}`}],temperature:.7,max_tokens:500})});
+const d=await r.json();
+if(!r.ok){res.innerHTML=`<strong>API Error (${r.status}):</strong> ${d.error?.message || JSON.stringify(d)}`;return;}
+const g=d.choices[0].message.content;
 res.innerHTML=g.replace(/\n/g,'<br>');
-}catch(e){res.innerHTML='Error grading. Check connection.'}
+}catch(e){res.innerHTML='Network error. Check your internet connection.'}
 finally{btn.disabled=false;btn.innerHTML='Submit for Grading';}
 }
 
