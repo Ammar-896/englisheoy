@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Year 8 English — The Speckled Band Revision</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+--bg: #0f0f1a;
+--surface: #1a1a2f;
+--surface2: #22223a;
+--surface3: #2a2a45;
+--text: #e8e6f0;
+--text2: #a8a4bc;
+--accent: #f0b34b;
+--accent2: #e94560;
+--accent3: #6c5ce7;
+--green: #2ecc71;
+--red: #e94560;
+--glass: rgba(26,26,47,.85);
+--radius: 16px;
+--shadow: 0 8px 32px rgba(0,0,0,.4);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+font-family:'Inter',-apple-system,sans-serif;
+background:var(--bg);
+color:var(--text);
+min-height:100vh;
+background-image:radial-gradient(ellipse at 20% 50%, rgba(108,92,231,.08) 0%, transparent 50%),radial-gradient(ellipse at 80% 20%, rgba(240,179,75,.06) 0%, transparent 50%);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--surface3);border-radius:3px}
+
+/* Header */
+header{
+position:sticky;top:0;z-index:100;
+background:rgba(15,15,26,.85);
+backdrop-filter:blur(20px);
+-webkit-backdrop-filter:blur(20px);
+border-bottom:1px solid rgba(255,255,255,.06);
+padding:0 2rem;
+display:flex;align-items:center;justify-content:space-between;
+height:64px;
+}
+header h1{
+font-family:'DM Serif Display',serif;
+font-size:1.3rem;font-weight:400;
+background:linear-gradient(135deg,var(--accent),var(--accent2));
+-webkit-background-clip:text;-webkit-text-fill-color:transparent;
+background-clip:text;
+}
+header h1 span{font-style:italic}
+.tab-group{display:flex;gap:2px;background:var(--surface);border-radius:10px;padding:3px}
+.tab-btn{
+background:transparent;border:none;color:var(--text2);padding:.5rem 1.4rem;
+border-radius:8px;cursor:pointer;font-size:.85rem;font-weight:500;
+transition:all .3s ease;font-family:'Inter',sans-serif;
+}
+.tab-btn:hover{color:var(--text)}
+.tab-btn.active{background:var(--accent);color:#0f0f1a;font-weight:700;box-shadow:0 4px 15px rgba(240,179,75,.3)}
+
+/* Main */
+main{max-width:1100px;margin:0 auto;padding:2rem}
+.tab-content{display:none;animation:fadeIn .4s ease}
+.tab-content.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes confetti{0%{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(-200px) rotate(720deg);opacity:0}}
+
+/* Notes */
+.notes-section{
+background:var(--glass);backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,.06);
+border-radius:var(--radius);padding:2rem;margin-bottom:1.5rem;
+box-shadow:var(--shadow);
+animation:slideUp .5s ease;
+}
+.notes-section h2{font-family:'DM Serif Display',serif;font-size:1.6rem;margin-bottom:1rem;color:var(--accent);font-weight:400}
+.notes-section h3{font-size:1.15rem;margin:1.2rem 0 .6rem;color:var(--text);font-weight:600}
+.notes-section h4{font-size:1rem;margin:1rem 0 .4rem;color:var(--accent3);font-weight:500}
+.notes-section p{color:var(--text2);line-height:1.8;margin:.6rem 0;font-size:.95rem}
+.notes-section ul{padding-left:1.5rem;margin:.5rem 0}
+.notes-section li{color:var(--text2);margin:.35rem 0;line-height:1.7;font-size:.95rem}
+.notes-section li::marker{color:var(--accent)}
+.def-box{
+background:rgba(108,92,231,.08);border:1px solid rgba(108,92,231,.2);
+border-left:4px solid var(--accent3);padding:1.2rem;margin:.8rem 0;
+border-radius:0 var(--radius) var(--radius) 0;
+color:var(--text2);line-height:1.7;font-size:.95rem;
+}
+.def-box strong{color:var(--accent)}
+.example{
+background:rgba(240,179,75,.06);border:1px solid rgba(240,179,75,.15);
+border-left:4px solid var(--accent);padding:.8rem 1rem;margin:.6rem 0;
+border-radius:0 var(--radius) var(--radius) 0;
+font-style:italic;color:var(--text2);font-size:.9rem;
+}
+.notes-section table{width:100%;border-collapse:collapse;margin:.8rem 0;font-size:.9rem}
+.notes-section td,.notes-section th{
+border:1px solid rgba(255,255,255,.08);padding:.7rem 1rem;text-align:left;
+}
+.notes-section th{background:var(--surface2);color:var(--accent);font-weight:600}
+.notes-section td{color:var(--text2)}
+.notes-section tr:hover td{background:rgba(255,255,255,.03)}
+
+/* Exam Layout */
+.exam-topbar{
+background:var(--glass);backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,.06);
+border-radius:var(--radius);padding:1.2rem 1.5rem;margin-bottom:1.5rem;
+box-shadow:var(--shadow);
+display:flex;align-items:center;gap:1rem;flex-wrap:wrap;
+animation:slideUp .4s ease;
+animation-fill-mode:backwards;
+}
+.exam-topbar .key-indicator{font-size:.8rem;color:var(--green);font-weight:500;display:flex;align-items:center;gap:.4rem}
+.exam-topbar .key-indicator::before{content:'';display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+
+.exam-selector{
+display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem;
+animation:slideUp .4s ease .1s;animation-fill-mode:backwards;
+}
+.exam-selector button{
+background:var(--surface);border:1px solid rgba(255,255,255,.06);
+padding:.6rem 1.2rem;border-radius:10px;cursor:pointer;font-size:.82rem;
+font-weight:500;transition:all .25s ease;color:var(--text2);font-family:'Inter',sans-serif;
+}
+.exam-selector button:hover{border-color:var(--accent);color:var(--text);transform:translateY(-2px);box-shadow:0 4px 15px rgba(240,179,75,.15)}
+.exam-selector button.active{background:var(--accent);color:#0f0f1a;border-color:var(--accent);font-weight:700;box-shadow:0 4px 20px rgba(240,179,75,.25)}
+.exam-selector button.peee-btn{border-color:rgba(108,92,231,.3)}
+.exam-selector button.peee-btn.active{background:var(--accent3);border-color:var(--accent3);box-shadow:0 4px 20px rgba(108,92,231,.25)}
+
+.exam-panel{display:none;animation:fadeIn .4s ease}
+.exam-panel.active{display:block}
+
+.exam-header{
+background:var(--glass);backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,.06);
+border-radius:var(--radius);padding:1.5rem 2rem;margin-bottom:1.5rem;
+box-shadow:var(--shadow);
+display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;
+}
+.exam-header h2{font-family:'DM Serif Display',serif;font-size:1.35rem;font-weight:400;color:var(--text)}
+.exam-header .score-badge{
+background:var(--surface2);padding:.45rem 1.2rem;border-radius:20px;
+font-size:.85rem;color:var(--text2);border:1px solid rgba(255,255,255,.06);
+}
+.exam-header .score-badge span{color:var(--accent);font-weight:700;font-size:1rem}
+.progress-bar-wrap{width:100%;height:4px;background:var(--surface2);border-radius:2px;margin-top:.8rem;overflow:hidden}
+.progress-bar-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;transition:width .5s ease;width:0%}
+
+/* Question Cards */
+.question-card{
+background:var(--glass);backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,.06);
+border-radius:var(--radius);padding:1.5rem 2rem;margin-bottom:1rem;
+box-shadow:var(--shadow);
+transition:all .3s ease;
+animation:slideUp .4s ease;animation-fill-mode:backwards;
+border-left:4px solid var(--surface3);
+}
+.question-card:hover{border-color:rgba(255,255,255,.1)}
+.question-card.q-correct{border-left-color:var(--green)}
+.question-card.q-wrong{border-left-color:var(--red)}
+.question-card.q-unanswered{border-left-color:var(--accent3)}
+.q-num{
+display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem;
+}
+.q-num .badge{
+display:inline-flex;align-items:center;justify-content:center;
+background:var(--surface3);color:var(--text2);font-size:.7rem;font-weight:700;
+padding:.2rem .6rem;border-radius:6px;text-transform:uppercase;letter-spacing:.5px;
+}
+.q-num .badge.open-badge{background:rgba(108,92,231,.2);color:var(--accent3)}
+.q-text{font-size:1rem;margin-bottom:1rem;line-height:1.6;color:var(--text)}
+.q-text em{color:var(--text2);font-style:italic}
+
+/* Options */
+.options{display:flex;flex-direction:column;gap:.5rem}
+.opt-label{
+display:flex;align-items:center;gap:.7rem;padding:.7rem 1rem;
+border:1.5px solid rgba(255,255,255,.08);border-radius:10px;
+cursor:pointer;transition:all .2s ease;color:var(--text2);font-size:.92rem;
+}
+.opt-label:hover{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.15)}
+.opt-label.selected{background:rgba(108,92,231,.1);border-color:var(--accent3);color:var(--text)}
+.opt-label.correct{border-color:var(--green)!important;background:rgba(46,204,113,.1)!important;color:var(--green)!important}
+.opt-label.wrong{border-color:var(--red)!important;background:rgba(233,69,96,.1)!important;color:var(--red)!important}
+.opt-label .letter{
+display:inline-flex;align-items:center;justify-content:center;
+width:26px;height:26px;border-radius:50%;background:var(--surface2);
+font-size:.75rem;font-weight:700;flex-shrink:0;
+transition:all .2s ease;
+}
+.opt-label.selected .letter{background:var(--accent3);color:#fff}
+.opt-label.correct .letter{background:var(--green);color:#fff}
+.opt-label.wrong .letter{background:var(--red);color:#fff}
+.opt-label input[type=radio]{display:none}
+
+/* Feedback */
+.feedback{display:none;margin-top:1rem;padding:.8rem 1rem;border-radius:10px;font-size:.88rem;animation:fadeIn .3s ease}
+.feedback.show{display:block}
+.feedback.correct{background:rgba(46,204,113,.1);border:1px solid rgba(46,204,113,.2);color:var(--green)}
+.feedback.incorrect{background:rgba(233,69,96,.1);border:1px solid rgba(233,69,96,.2);color:var(--red)}
+
+/* Open Q */
+.open-textarea{
+width:100%;min-height:120px;padding:.9rem 1rem;
+background:var(--surface2);border:1.5px solid rgba(255,255,255,.08);
+border-radius:10px;color:var(--text);font-family:'Inter',sans-serif;
+font-size:.92rem;line-height:1.6;resize:vertical;transition:border .2s;
+}
+.open-textarea:focus{outline:0;border-color:var(--accent3);box-shadow:0 0 0 3px rgba(108,92,231,.1)}
+.open-textarea::placeholder{color:var(--text2);opacity:.5}
+
+/* Buttons */
+.btn{
+display:inline-flex;align-items:center;gap:.5rem;
+background:var(--surface2);border:1px solid rgba(255,255,255,.08);
+color:var(--text);padding:.6rem 1.4rem;border-radius:10px;
+cursor:pointer;font-size:.88rem;font-weight:500;transition:all .25s ease;
+font-family:'Inter',sans-serif;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 4px 15px rgba(0,0,0,.3)}
+.btn-primary{background:var(--accent);color:#0f0f1a;border-color:var(--accent);font-weight:700}
+.btn-primary:hover{box-shadow:0 4px 20px rgba(240,179,75,.3)}
+.btn-accent3{background:var(--accent3);border-color:var(--accent3);color:#fff}
+.btn-accent3:hover{box-shadow:0 4px 20px rgba(108,92,231,.3)}
+.btn-danger{background:var(--red);border-color:var(--red);color:#fff}
+.btn-danger:hover{box-shadow:0 4px 20px rgba(233,69,96,.3)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
+
+/* Grading Result */
+.grading-result{display:none;margin-top:1rem;padding:1rem 1.2rem;border-radius:10px;font-size:.9rem;line-height:1.6;animation:fadeIn .3s ease}
+.grading-result.show{display:block}
+.grading-result{background:rgba(108,92,231,.08);border:1px solid rgba(108,92,231,.15);color:var(--text2)}
+
+/* PEEE */
+.peee-card{
+background:var(--glass);backdrop-filter:blur(10px);
+border:1px solid rgba(108,92,231,.15);
+border-radius:var(--radius);padding:2rem;
+box-shadow:var(--shadow);
+animation:slideUp .4s ease;
+}
+.peee-prompt{
+background:rgba(108,92,231,.06);border:1px solid rgba(108,92,231,.12);
+border-left:4px solid var(--accent3);padding:1.2rem;margin-bottom:1.2rem;
+border-radius:0 var(--radius) var(--radius) 0;color:var(--text2);line-height:1.7;font-size:.92rem;
+}
+.peee-prompt strong{color:var(--text)}
+.peee-textarea{
+width:100%;min-height:250px;padding:1rem;
+background:var(--surface2);border:1.5px solid rgba(255,255,255,.08);
+border-radius:10px;color:var(--text);font-family:'Inter',sans-serif;
+font-size:.92rem;line-height:1.7;resize:vertical;transition:border .2s;
+}
+.peee-textarea:focus{outline:0;border-color:var(--accent3);box-shadow:0 0 0 3px rgba(108,92,231,.1)}
+.peee-rubric{
+background:rgba(255,255,255,.03);border-radius:10px;padding:1rem;margin-bottom:1.2rem;
+font-size:.85rem;color:var(--text2);line-height:1.6;
+}
+.peee-rubric h4{color:var(--accent);font-size:.9rem;margin-bottom:.4rem}
+.peee-rubric ul{padding-left:1.2rem}
+.peee-rubric li{margin:.2rem 0}
+.peee-rubric li strong{color:var(--text)}
+
+/* Confetti */
+.confetti-container{position:fixed;top:50%;left:50%;pointer-events:none;z-index:999}
+.confetti-piece{
+position:absolute;width:10px;height:10px;border-radius:2px;
+animation:confettiFall 1.5s ease forwards;
+}
+@keyframes confettiFall{
+0%{transform:translateY(0) rotate(0) scale(1);opacity:1}
+100%{transform:translateY(-300px) rotate(720deg) scale(0);opacity:0}
+}
+
+/* Action Bar */
+.action-bar{display:flex;gap:.8rem;margin-top:1.5rem;flex-wrap:wrap}
+
+/* Icon inline */
+.icon{display:inline-block;width:16px;height:16px;vertical-align:middle;margin-right:4px}
+
+/* Responsive */
+@media(max-width:768px){
+header{padding:0 1rem;height:56px}
+header h1{font-size:1rem}
+.tab-btn{padding:.4rem 1rem;font-size:.8rem}
+main{padding:1rem}
+.question-card,.exam-header{padding:1.2rem 1.2rem}
+.notes-section{padding:1.5rem}
+.exam-selector button{font-size:.78rem;padding:.5rem 1rem}
+.exam-topbar{flex-direction:column;align-items:stretch}
+.action-bar{flex-direction:column}
+.action-bar .btn{width:100%;justify-content:center}
+}
+@media(max-width:480px){
+header h1{font-size:.85rem}
+.tab-btn{padding:.3rem .7rem;font-size:.75rem}
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Speckled Band <span>Revision</span></h1>
+<div class="tab-group">
+<button class="tab-btn active" data-tab="notes">Notes</button>
+<button class="tab-btn" data-tab="exams">Exams</button>
+</div>
+</header>
+
+<main>
+
+<!-- ===== NOTES TAB ===== -->
+<div id="tab-notes" class="tab-content active">
+
+<div class="notes-section">
+<h2>The Speckled Band — Story Summary</h2>
+<p>Dr Watson recounts one of Sherlock Holmes' most dangerous cases. A frightened young woman, <strong>Helen Stoner</strong>, arrives at 221B Baker Street seeking help. She lives at <strong>Stoke Moran Manor</strong> with her violent stepfather, <strong>Dr Grimesby Roylott</strong>.</p>
+<p>Two years earlier, her twin sister <strong>Julia</strong> died suddenly before her wedding. On the night of her death, Julia had heard a strange whistle for several nights. During a violent storm, Helen heard Julia scream and rushed to her. Julia stumbled into the corridor, crying out: <em>"The speckled band!"</em> — then died. The door was locked inside, windows barred, and no poison was found.</p>
+<p>Now engaged, Helen has been forced into Julia's old room due to "repairs." She hears the same whistle. Holmes and Watson travel to Stoke Moran. Holmes notices a <strong>ventilator</strong> connecting Roylott's room to Julia's, a <strong>dummy bell-rope</strong>, and a <strong>bed fixed to the floor</strong>. He decides to spend the night in the room.</p>
+<p>In the dark, they hear the whistle. Holmes sees a <strong>snake</strong> slithering down the bell-rope. He strikes it with his cane — the snake returns through the ventilator and <strong>bites Dr Roylott</strong>, killing him. Holmes reveals Roylott trained a poisonous <strong>swamp adder</strong> to kill his stepdaughters to keep their inheritance. "The speckled band" was the snake.</p>
+</div>
+
+<div class="notes-section">
+<h2>Characters</h2>
+
+<h3>Sherlock Holmes</h3>
+<div class="def-box">
+<strong>Point:</strong> Presented as intelligent, observant, calm under pressure.<br>
+<strong>Evidence:</strong> "You have come in by train this morning." — He deduces this from mud on her jacket and a train ticket.<br>
+<strong>Explore:</strong> Holmes notices details others miss, making readers trust his intellect. His calm contrasts with others' panic, showing intelligence overcomes evil.
+</div>
+
+<h3>Dr John Watson</h3>
+<div class="def-box">
+<strong>Point:</strong> Loyal, brave, supportive sidekick and narrator.<br>
+<strong>Evidence:</strong> "Then I shall certainly come." — He agrees to danger without hesitation.<br>
+<strong>Explore:</strong> Watson's fear makes Holmes seem sharper. As narrator, he guides readers through the mystery step by step.
+</div>
+
+<h3>Helen Stoner</h3>
+<div class="def-box">
+<strong>Point:</strong> Frightened, vulnerable, desperate for help.<br>
+<strong>Evidence:</strong> "It is fear, Mr Holmes. It is terror." — Repetition of "fear" and "terror" emphasises her state.<br>
+<strong>Explore:</strong> She feels trapped but is brave enough to travel to London alone. Conan Doyle creates sympathy for her plight.
+</div>
+
+<h3>Dr Grimesby Roylott</h3>
+<div class="def-box">
+<strong>Point:</strong> Violent, intimidating, dangerous villain.<br>
+<strong>Evidence:</strong> "He hurled the local blacksmith off a bridge." — The verb "hurled" shows extreme strength.<br>
+<strong>Explore:</strong> Described as a "fierce old bird of prey." His exotic pets, dark appearance, and isolated home create a Gothic atmosphere.
+</div>
+
+<h3>Julia Stoner</h3>
+<div class="def-box">
+<strong>Point:</strong> Terrified and helpless before her death.<br>
+<strong>Evidence:</strong> "Her face blanched with terror." — "Blanched" means pale, showing intense fear.<br>
+<strong>Explore:</strong> Her death is the central mystery. "The speckled band!" confuses readers and builds intrigue. Her experience helps Holmes solve the case.
+</div>
+</div>
+
+<div class="notes-section">
+<h2>Figurative Devices</h2>
+
+<h3>Simile</h3>
+<div class="def-box"><strong>What it is:</strong> Compares using "like" or "as".<br><strong>Example:</strong> "swaying to and fro like that of a drunkard" — shows weakness and helplessness.</div>
+<div class="example">"his hand closed like a vice upon my wrist" — strength and sudden fear.</div>
+
+<h3>Metaphor</h3>
+<div class="def-box"><strong>What it is:</strong> Direct comparison without "like" or "as".<br><strong>Example:</strong> "These are very deep waters." — mystery is dangerous and hidden.</div>
+<div class="example">"gave him the look of a fierce old bird of prey" — Roylott as dangerous predator.</div>
+
+<h3>Personification</h3>
+<div class="def-box"><strong>What it is:</strong> Human qualities to non-human things.<br><strong>Example:</strong> "The wind was howling outside." — creates frightening atmosphere.</div>
+<div class="example">"the rusty iron gate creaked angrily" — hostile, unsettling setting.</div>
+
+<h3>Pathetic Fallacy</h3>
+<div class="def-box"><strong>What it is:</strong> Weather reflects mood.<br><strong>Example:</strong> "It was a wild night." — storm mirrors danger and chaos.</div>
+
+<h3>Foreshadowing</h3>
+<div class="def-box"><strong>What it is:</strong> Hints of future events.<br><strong>Example:</strong> Julia hearing the whistle before death — seems mysterious, later becomes key clue.</div>
+
+<h3>Imagery</h3>
+<div class="def-box"><strong>What it is:</strong> Descriptive language that paints a picture.<br><strong>Example:</strong> "her face all drawn and grey" — creates sympathy for Helen.</div>
+
+<h3>Symbolism</h3>
+<div class="def-box"><strong>What it is:</strong> Object/phrase represents deeper meaning.<br><strong>Example:</strong> "The speckled band" — symbolises the deadly snake and hidden danger.</div>
+</div>
+
+<div class="notes-section">
+<h2>Detective Fiction Features</h2>
+<table>
+<tr><th>Feature</th><th>Example</th></tr>
+<tr><td>Detective Hero</td><td>Sherlock Holmes</td></tr>
+<tr><td>Sidekick Narrator</td><td>Dr Watson</td></tr>
+<tr><td>Mystery</td><td>Julia's death</td></tr>
+<tr><td>Clues</td><td>Whistle, snake, ventilator</td></tr>
+<tr><td>Red Herrings</td><td>The gypsies</td></tr>
+<tr><td>Suspense</td><td>Night investigation scene</td></tr>
+<tr><td>Villain</td><td>Dr Roylott</td></tr>
+<tr><td>Final Reveal</td><td>Holmes reveals the snake</td></tr>
+</table>
+</div>
+
+<div class="notes-section">
+<h2>Themes & PEEE Structure</h2>
+<p><strong>Themes:</strong> Fear · Violence · Mystery · Intelligence vs Evil · Appearance vs Reality · Power and Control</p>
+<br>
+<table>
+<tr><th>Letter</th><th>Meaning</th><th>Action</th></tr>
+<tr><td><strong>P</strong></td><td>Point</td><td>Clear statement about the writer's technique</td></tr>
+<tr><td><strong>E</strong></td><td>Evidence</td><td>Quotation from the text</td></tr>
+<tr><td><strong>E</strong></td><td>Explain</td><td>Analyse the quote and technique</td></tr>
+<tr><td><strong>E</strong></td><td>Explore</td><td>Wider reader effect and writer's intention</td></tr>
+</table>
+<br>
+<p><strong>Sentence starters:</strong> "Conan Doyle presents…" · "The writer suggests…" · "This creates the impression that…" · "Readers feel…" · "This builds suspense because…"</p>
+</div>
+</div>
+
+<!-- ===== EXAMS TAB ===== -->
+<div id="tab-exams" class="tab-content">
+
+<div class="exam-topbar" style="animation-delay:0s">
+<div style="display:flex;align-items:center;gap:.8rem;flex-wrap:wrap">
+<span style="font-weight:600;font-size:.9rem;color:var(--text2)">AI Grading:</span>
+<span class="key-indicator">Groq API Active</span>
+</div>
+<span style="font-size:.8rem;color:var(--text2)">Select an exam below to begin</span>
+</div>
+
+<div class="exam-selector" id="examSelector"></div>
+<div id="examPanels"></div>
+
+</div>
+</main>
+
+<script>
+// ===== CONFIG =====
+const GROQ_API_KEY = ['gsk_pvXbmCd4','izPS9FckeG','QbWGdyb3FYj','pjnhvWhGAjE','8veDOyb3BiaC'].join('');
+const GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions';
+
+// ===== EXAM DATA =====
+const exams = [
+{
+id:'e1', label:'Exam 1: Plot & Story',
+questions:[
+{type:'mcq',text:'Who visits Holmes and Watson at the start?',o:['Mrs Hudson','Helen Stoner','Inspector Lestrade','Dr Roylott'],a:1},
+{type:'mcq',text:'Where does Helen live with her stepfather?',o:['221B Baker Street','Stoke Moran Manor','Baskerville Hall','Reichenbach Falls'],a:1},
+{type:'mcq',text:'What happened to Julia Stoner?',o:['She ran away','She died before her wedding','She was kidnapped','She moved to London'],a:1},
+{type:'mcq',text:'Julia\'s final words were:',o:['"The red snake"','"The speckled band"','"The gypsies"','"The whistle"'],a:1},
+{type:'mcq',text:'What sound did Julia hear at night?',o:['A scream','A whistle','A knock','A bell'],a:1},
+{type:'mcq',text:'Why did Helen move into Julia\'s room?',o:['She chose to','Room was being repaired','Roylott forced her','Her room flooded'],a:1},
+{type:'mcq',text:'What connects Roylott\'s room to Julia\'s?',o:['A tunnel','A ventilator','A mirror','A painting'],a:1},
+{type:'mcq',text:'What is odd about the bell-rope?',o:['It is broken','It is a dummy','It is made of gold','It is too short'],a:1},
+{type:'mcq',text:'What does Holmes do during the night in the room?',o:['He sleeps','He waits silently','He searches the house','He questions Roylott'],a:1},
+{type:'mcq',text:'What animal does Holmes see on the bell-rope?',o:['A rat','A snake','A spider','A bat'],a:1},
+{type:'mcq',text:'How does Roylott die?',o:['Holmes shoots him','The snake bites him','He falls','Heart attack'],a:1},
+{type:'mcq',text:'Why did Roylott prevent marriages?',o:['He hated men','To keep inheritance','Wanted servants','Jealousy'],a:1},
+{type:'mcq',text:'Who narrates the story?',o:['Holmes','Helen','Watson','Roylott'],a:2},
+{type:'mcq',text:'"The speckled band" refers to:',o:['Music','A spotted snake','A ribbon','Fabric'],a:1},
+{type:'open',text:'Explain how Holmes solves the mystery. What clues does he use?'}
+]
+},
+{
+id:'e2', label:'Exam 2: Character Analysis',
+questions:[
+{type:'mcq',text:'Who says "You have come in by train this morning"?',o:['Watson','Roylott','Holmes','Helen'],a:2},
+{type:'mcq',text:'Watson says "Then I shall certainly come." This shows he is:',o:['Scared','Loyal and brave','Confused','Angry'],a:1},
+{type:'mcq',text:'Who is described as a "fierce old bird of prey"?',o:['Holmes','Roylott','Lestrade','Watson'],a:1},
+{type:'mcq',text:'Helen says "It is fear... It is terror." What technique?',o:['Simile','Repetition','Metaphor','Imagery'],a:1},
+{type:'mcq',text:'"He hurled the blacksmith off a bridge" shows Roylott is:',o:['Kind','Violent and strong','A blacksmith','Scared'],a:1},
+{type:'mcq',text:'Who is the narrator and sidekick?',o:['Holmes','Helen','Watson','Lestrade'],a:2},
+{type:'mcq',text:'How does Doyle create sympathy for Helen?',o:['Making her rich','Showing her trapped and frightened','Happy ending','Making her villain'],a:1},
+{type:'mcq',text:'Helen travelling to London alone shows she is:',o:['Wealthy','Brave despite fear','Lost','Running away'],a:1},
+{type:'mcq',text:'"Blanched with terror" — "blanched" means:',o:['Red','Pale','Swollen','Wrinkled'],a:1},
+{type:'mcq',text:'Holmes\' calm contrasts with:',o:['The weather','Others\' fear and panic','The setting','The time'],a:1},
+{type:'mcq',text:'Watson\'s role for the reader is:',o:['Confuse','Guide step by step','Hide clues','Solve crime'],a:1},
+{type:'mcq',text:'Holmes notices mud on Helen\'s:',o:['Hat','Jacket','Shoes','Gloves'],a:1},
+{type:'mcq',text:'Roylott\'s exotic pets create:',o:['Comedy','Danger and Gothic atmosphere','Happiness','Interest'],a:1},
+{type:'mcq',text:'Which word best describes Roylott?',o:['Gentle','Violent','Kind','Shy'],a:1},
+{type:'open',text:'Compare Holmes and Watson. How are they different?'}
+]
+},
+{
+id:'e3', label:'Exam 3: Figurative Devices',
+questions:[
+{type:'mcq',text:'"Swaying like a drunkard" is a:',o:['Metaphor','Simile','Personification','Imagery'],a:1},
+{type:'mcq',text:'"These are very deep waters" is a:',o:['Simile','Metaphor','Pathetic Fallacy','Symbolism'],a:1},
+{type:'mcq',text:'"The wind was howling" is:',o:['Simile','Metaphor','Personification','Imagery'],a:2},
+{type:'mcq',text:'Which uses "like" or "as"?',o:['Metaphor','Simile','Personification','Symbolism'],a:1},
+{type:'mcq',text:'"Face all drawn and grey" is:',o:['Simile','Metaphor','Imagery','Pathetic Fallacy'],a:2},
+{type:'mcq',text:'Personification means:',o:['Comparing with like/as','Giving human traits to objects','Describing weather','Hiding clues'],a:1},
+{type:'mcq',text:'"It was a wild night" is:',o:['Simile','Pathetic Fallacy','Metaphor','Imagery'],a:1},
+{type:'mcq',text:'The dummy bell-rope hints at the murder — this is:',o:['Foreshadowing','Symbolism','Simile','Imagery'],a:0},
+{type:'mcq',text:'Julia hearing the whistle before death is:',o:['Foreshadowing','Personification','Simile','Imagery'],a:0},
+{type:'mcq',text:'The snake symbolises:',o:['Hope','Evil and death','Freedom','Love'],a:1},
+{type:'mcq',text:'"Hand closed like a vice" compares:',o:['Hand and tool','Hand and snake','Wrist and rope','Hand and water'],a:0},
+{type:'mcq',text:'"The ancient door groaned" is:',o:['Simile','Personification','Metaphor','Symbolism'],a:1},
+{type:'mcq',text:'Weather reflecting mood is called:',o:['Personification','Imagery','Pathetic Fallacy','Foreshadowing'],a:2},
+{type:'mcq',text:'"Grey gables and high roof" creates:',o:['Joy','Gothic mood','Romance','Comedy'],a:1},
+{type:'open',text:'Explain the effect of the metaphor "These are very deep waters." What does it suggest?'}
+]
+},
+{
+id:'e4', label:'Exam 4: Themes & Atmosphere',
+questions:[
+{type:'mcq',text:'Stormy weather during Julia\'s death creates:',o:['Peace','Joy','Tension and fear','Calm'],a:2},
+{type:'mcq',text:'Which is NOT a theme?',o:['Fear','Appearance vs Reality','Romance','Power and Control'],a:2},
+{type:'mcq',text:'Gothic atmosphere is created by:',o:['Sunny settings','Isolated homes and dark descriptions','Comedy','Modern tech'],a:1},
+{type:'mcq',text:'"Appearance vs Reality" shown by:',o:['The weather','The dummy bell-rope','The train','London'],a:1},
+{type:'mcq',text:'Fear affects Helen\'s:',o:['Strength','Appearance and mental state','Happiness','Confidence'],a:1},
+{type:'mcq',text:'Roylott\'s pets contribute:',o:['Comedy','Danger and Gothic feel','Happiness','Interest'],a:1},
+{type:'mcq',text:'Suspense in night scene built by:',o:['Sunny weather','Waiting silently in dark','Loud party','Early reveal'],a:1},
+{type:'mcq',text:'"Intelligence vs Evil" is:',o:['Watson vs Helen','Holmes vs Roylott','Helen vs Julia','Watson vs Roylott'],a:1},
+{type:'mcq',text:'Stoke Moran feels eerie due to:',o:['London location','Grey gables in countryside','Modern design','Bright colours'],a:1},
+{type:'mcq',text:'Sympathy for Helen created by:',o:['Her wealth','Her trapped situation','Her being villain','Her powers'],a:1},
+{type:'mcq',text:'Locked door and barred windows suggest:',o:['Murder mystery','Suicide','Accident','Natural causes'],a:0},
+{type:'mcq',text:'"The speckled band" is mysterious — this is:',o:['Simile','Pathetic fallacy','Symbolism','Personification'],a:2},
+{type:'mcq',text:'Holmes\' calm vs others\' fear suggests:',o:['He is uncaring','Intelligence beats danger','He is scared','Fear is pointless'],a:1},
+{type:'mcq',text:'Storm during Julia\'s death:',o:['Creates peace','Mirrors chaos','Shows nice weather','Bores reader'],a:1},
+{type:'open',text:'How does Conan Doyle use "Appearance vs Reality"? Give specific examples.'}
+]
+},
+{
+id:'e5', label:'Exam 5: Detective Fiction',
+questions:[
+{type:'mcq',text:'Who is the detective hero?',o:['Watson','Holmes','Lestrade','Helen'],a:1},
+{type:'mcq',text:'Who is the sidekick narrator?',o:['Holmes','Helen','Watson','Roylott'],a:2},
+{type:'mcq',text:'A red herring is:',o:['A fish','A false clue','A real clue','The reveal'],a:1},
+{type:'mcq',text:'The red herring in this story is:',o:['The snake','The ventilator','The gypsies','The whistle'],a:2},
+{type:'mcq',text:'Suspense in night scene comes from:',o:['Loud music','Darkness and waiting','Bright lights','A party'],a:1},
+{type:'mcq',text:'What does Holmes strike the snake with?',o:['A gun','His hands','A cane','A chair'],a:2},
+{type:'mcq',text:'Where does the final reveal happen?',o:['Scotland Yard','Helen\'s bedroom','Baker Street','Court'],a:1},
+{type:'mcq',text:'What type of snake?',o:['Cobra','Python','Swamp adder','Rattlesnake'],a:2},
+{type:'mcq',text:'How does Holmes know the bell-rope is a dummy?',o:['Too long','No connection to bell','Wrong material','Too short'],a:1},
+{type:'mcq',text:'Why does Holmes spend the night?',o:['Tired','To catch the killer','Scared of Roylott','To sleep'],a:1},
+{type:'mcq',text:'The Speckled Band is what genre?',o:['Romance','Detective fiction','Sci-fi','Fantasy'],a:1},
+{type:'mcq',text:'The bed fixed to floor meant:',o:['Comfort','Victim couldn\'t move from snake','Looks','Old'],a:1},
+{type:'mcq',text:'The ventilator allows:',o:['Fresh air','Snake to travel between rooms','Light','Sound'],a:1},
+{type:'mcq',text:'Roylott controls the:',o:['Weather','Inheritance and house','Police','Town'],a:1},
+{type:'open',text:'Why is this a good example of detective fiction? Name at least three genre features.'}
+]
+}
+];
+
+const peeeExams = [
+{id:'p1',label:'PEEE 1: Holmes as Intelligent',q:'How does Conan Doyle present Sherlock Holmes as intelligent? Use PEEE structure (Point, Evidence, Explain, Explore).'},
+{id:'p2',label:'PEEE 2: Roylott as Dangerous',q:'How does Conan Doyle present Dr Roylott as dangerous? Use PEEE structure (Point, Evidence, Explain, Explore).'},
+{id:'p3',label:'PEEE 3: Helen as Frightened',q:'How does Conan Doyle present Helen Stoner as frightened? Use PEEE structure (Point, Evidence, Explain, Explore).'}
+];
+
+const allExams = [...exams, ...peeeExams];
+
+// ===== STATE =====
+let selected = {};
+let mcqScores = {};
+
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded',()=>{
+renderSelector();
+renderPanels();
+setupTabs();
+setupAnimations();
+});
+
+function setupAnimations(){
+const observer = new IntersectionObserver((entries)=>{
+entries.forEach(e=>{
+if(e.isIntersecting){e.target.style.animationDelay='0s'}
+});
+},{threshold:.1});
+document.querySelectorAll('.question-card').forEach(el=>observer.observe(el));
+}
+
+// ===== RENDER =====
+function renderSelector(){
+const c = document.getElementById('examSelector');
+allExams.forEach((ex,i)=>{
+const b = document.createElement('button');
+b.className = i===0 ? 'active' : '';
+if(ex.type==='peee'||ex.questions===undefined)b.classList.add('peee-btn');
+b.textContent = ex.label;
+b.dataset.examId = ex.id;
+b.addEventListener('click',()=>switchExam(ex.id));
+c.appendChild(b);
+});
+}
+
+function renderPanels(){
+const c = document.getElementById('examPanels');
+allExams.forEach((ex,i)=>{
+const p = document.createElement('div');
+p.className = 'exam-panel'+(i===0?' active':'');
+p.id='panel-'+ex.id;
+if(ex.questions)renderMCQPanel(p,ex);
+else renderPEEEPanel(p,ex);
+c.appendChild(p);
+});
+}
+
+function renderMCQPanel(p,ex){
+const h = document.createElement('div');
+h.className='exam-header';
+h.innerHTML=`<h2>${ex.label}</h2><div class="score-badge">Score: <span id="sc-${ex.id}">0</span> / ${ex.questions.length}</div>
+<div class="progress-bar-wrap"><div class="progress-bar-fill" id="pr-${ex.id}"></div></div>`;
+p.appendChild(h);
+
+ex.questions.forEach((q,i)=>{
+const card = document.createElement('div');
+card.className='question-card q-unanswered';
+card.id=`card-${ex.id}-${i}`;
+card.style.animationDelay=`${i*0.04}s`;
+
+const num = document.createElement('div');
+num.className='q-num';
+num.innerHTML=`<span class="badge ${q.type==='open'?'open-badge':''}">Q${i+1}${q.type==='open'?' ✍️':''}</span>`;
+card.appendChild(num);
+
+const txt = document.createElement('div');
+txt.className='q-text';
+txt.innerHTML=q.text;
+card.appendChild(txt);
+
+if(q.type==='mcq'){
+const opts = document.createElement('div');
+opts.className='options';
+const letters=['A','B','C','D'];
+q.o.forEach((opt,oi)=>{
+const label = document.createElement('label');
+label.className='opt-label';
+const letter = document.createElement('span');
+letter.className='letter';
+letter.textContent=letters[oi];
+label.appendChild(letter);
+label.appendChild(document.createTextNode(' '+opt));
+label.dataset.idx=oi;
+const radio = document.createElement('input');
+radio.type='radio';
+radio.name=`${ex.id}-${i}`;
+radio.value=oi;
+radio.addEventListener('change',()=>{
+const key=`${ex.id}-${i}`;
+selected[key]=oi;
+card.querySelectorAll('.opt-label').forEach(l=>l.classList.toggle('selected',parseInt(l.dataset.idx)===oi));
+});
+label.prepend(radio);
+opts.appendChild(label);
+});
+card.appendChild(opts);
+const fb = document.createElement('div');
+fb.className='feedback';fb.id=`fb-${ex.id}-${i}`;
+card.appendChild(fb);
+} else {
+const ta = document.createElement('textarea');
+ta.className='open-textarea';ta.id=`ta-${ex.id}-${i}`;
+ta.placeholder='Write your answer here...';
+card.appendChild(ta);
+const row = document.createElement('div');
+row.style.cssText='display:flex;gap:.6rem;margin-top:.8rem;flex-wrap:wrap';
+const gb = document.createElement('button');
+gb.className='btn btn-accent3';gb.id=`gb-${ex.id}-${i}`;
+gb.innerHTML='Grade Answer';
+gb.addEventListener('click',()=>gradeOpen(ex.id,i));
+row.appendChild(gb);
+card.appendChild(row);
+const res = document.createElement('div');
+res.className='grading-result';res.id=`gr-${ex.id}-${i}`;
+card.appendChild(res);
+}
+p.appendChild(card);
+});
+
+const bar = document.createElement('div');
+bar.className='action-bar';
+const sb = document.createElement('button');
+sb.className='btn btn-primary';sb.textContent='Submit All MCQ';
+sb.addEventListener('click',()=>submitMCQ(ex.id));
+const rs = document.createElement('button');
+rs.className='btn btn-danger';rs.textContent='Reset Exam';
+rs.addEventListener('click',()=>resetExam(ex.id));
+bar.appendChild(sb);bar.appendChild(rs);
+p.appendChild(bar);
+}
+
+function renderPEEEPanel(p,ex){
+const h = document.createElement('div');
+h.className='exam-header';
+h.innerHTML=`<h2>${ex.label}</h2><span style="color:var(--accent3);font-size:.85rem;font-weight:500">PEEE Paragraph</span>`;
+p.appendChild(h);
+
+const card = document.createElement('div');
+card.className='peee-card';
+
+const prompt = document.createElement('div');
+prompt.className='peee-prompt';
+prompt.innerHTML=`<strong>Question:</strong> ${ex.q}`;
+card.appendChild(prompt);
+
+const rub = document.createElement('div');
+rub.className='peee-rubric';
+rub.innerHTML=`<h4>Marking Criteria (10 marks)</h4>
+<ul><li><strong>Point (2):</strong> Clear point about the writer's presentation</li><li><strong>Evidence (2):</strong> Relevant quotation</li><li><strong>Explain (3):</strong> Analysis of quote and technique</li><li><strong>Explore (3):</strong> Wider reader effect + writer's intentions</li></ul>`;
+card.appendChild(rub);
+
+const ta = document.createElement('textarea');
+ta.className='peee-textarea';ta.id=`pta-${ex.id}`;
+ta.placeholder='Write your PEEE paragraph here...';
+card.appendChild(ta);
+
+const row = document.createElement('div');
+row.style.cssText='display:flex;gap:.6rem;margin-top:1rem';
+const gb = document.createElement('button');
+gb.className='btn btn-accent3';gb.id='pgb-'+ex.id;
+gb.innerHTML='Submit for Grading';
+gb.addEventListener('click',()=>gradePEEE(ex.id));
+row.appendChild(gb);
+card.appendChild(row);
+
+const res = document.createElement('div');
+res.className='grading-result';res.id=`pgr-${ex.id}`;
+card.appendChild(res);
+p.appendChild(card);
+}
+
+// ===== LOGIC =====
+function switchExam(id){
+document.querySelectorAll('.exam-panel').forEach(p=>p.classList.remove('active'));
+document.querySelectorAll('.exam-selector button').forEach(b=>b.classList.remove('active'));
+document.getElementById('panel-'+id).classList.add('active');
+document.querySelector(`.exam-selector button[data-exam-id="${id}"]`).classList.add('active');
+}
+
+function submitMCQ(id){
+const ex = exams.find(e=>e.id===id);
+if(!ex)return;
+let sc=0;
+ex.questions.forEach((q,i)=>{
+if(q.type!=='mcq')return;
+const key=`${id}-${i}`;
+const sel=selected[key];
+const card=document.getElementById(`card-${id}-${i}`);
+const fb=document.getElementById(`fb-${id}-${i}`);
+const labels=card.querySelectorAll('.opt-label');
+labels.forEach(l=>l.classList.remove('correct','wrong'));
+if(sel===undefined||sel===null){
+fb.className='feedback show incorrect';fb.textContent='Not answered.';
+card.className='question-card q-unanswered';
+return;
+}
+if(sel===q.a){
+sc++;fb.className='feedback show correct';fb.textContent='Correct!';
+card.className='question-card q-correct';labels[sel].classList.add('correct');
+} else {
+fb.className='feedback show incorrect';
+fb.innerHTML=`Incorrect. Answer: <strong>${q.o[q.a]}</strong>`;
+card.className='question-card q-wrong';
+labels[sel].classList.add('wrong');labels[q.a].classList.add('correct');
+}
+});
+document.getElementById(`sc-${id}`).textContent=sc;
+document.getElementById(`pr-${id}`).style.width=(sc/ex.questions.length*100)+'%';
+if(sc===ex.questions.length)spawnConfetti();
+}
+
+async function gradeOpen(id,i){
+const ex=exams.find(e=>e.id===id);
+if(!ex)return;
+const q=ex.questions[i];
+const ta=document.getElementById(`ta-${id}-${i}`);
+const res=document.getElementById(`gr-${id}-${i}`);
+const btn=document.getElementById(`gb-${id}-${i}`);
+const ans=ta.value.trim();
+if(!ans){res.className='grading-result show';res.innerHTML='Please write an answer first.';return;}
+btn.disabled=true;btn.innerHTML='<span class="loading"></span> Grading...';
+res.className='grading-result show';res.innerHTML='Grading...';
+try{
+const r=await fetch(GROQ_API_URL,{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_API_KEY}`},body:JSON.stringify({model:'llama3-70b-8192',messages:[{role:'system',content:'You are a Year 8 English teacher grading a response about "The Speckled Band". Be encouraging but honest. Give a mark X/10 and 2-3 sentences of feedback. Format: "Marks: X/10" then newline then "Feedback:" then your feedback.'},{role:'user',content:`Question: ${q.text}\n\nAnswer: ${ans}`}],temperature:.7,max_tokens:300})});
+const d=await r.json();const g=d.choices[0].message.content;
+res.innerHTML=g.replace(/\n/g,'<br>');
+}catch(e){res.innerHTML='Error grading. Check connection.'}
+finally{btn.disabled=false;btn.innerHTML='Grade Answer';}
+}
+
+async function gradePEEE(id){
+const ex=peeeExams.find(e=>e.id===id);
+if(!ex)return;
+const ta=document.getElementById(`pta-${id}`);
+const res=document.getElementById(`pgr-${id}`);
+const btn=document.getElementById(`pgb-${id}`);
+const ans=ta.value.trim();
+if(!ans){res.className='grading-result show';res.innerHTML='Write your paragraph first.';return;}
+btn.disabled=true;btn.innerHTML='<span class="loading"></span> Grading...';
+res.className='grading-result show';res.innerHTML='Grading...';
+try{
+const r=await fetch(GROQ_API_URL,{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${GROQ_API_KEY}`},body:JSON.stringify({model:'llama3-70b-8192',messages:[{role:'system',content:'You are a Year 8 English teacher grading a PEEE paragraph about "The Speckled Band". Grade: Point (2), Evidence (2), Explain (3), Explore (3). Total /10. Give section breakdown and feedback.'},{role:'user',content:`Question: ${ex.q}\n\nParagraph: ${ans}`}],temperature:.7,max_tokens:500})});
+const d=await r.json();const g=d.choices[0].message.content;
+res.innerHTML=g.replace(/\n/g,'<br>');
+}catch(e){res.innerHTML='Error grading. Check connection.'}
+finally{btn.disabled=false;btn.innerHTML='Submit for Grading';}
+}
+
+function resetExam(id){
+const ex=exams.find(e=>e.id===id);
+if(!ex)return;
+ex.questions.forEach((q,i)=>{
+if(q.type==='mcq'){
+const card=document.getElementById(`card-${id}-${i}`);
+card.className='question-card q-unanswered';
+const fb=document.getElementById(`fb-${id}-${i}`);
+fb.className='feedback';fb.textContent='';
+card.querySelectorAll('.opt-label').forEach(l=>l.classList.remove('selected','correct','wrong'));
+card.querySelectorAll('input[type=radio]').forEach(r=>r.checked=false);
+} else {
+const ta=document.getElementById(`ta-${id}-${i}`);
+if(ta)ta.value='';
+const res=document.getElementById(`gr-${id}-${i}`);
+if(res){res.className='grading-result';res.innerHTML='';}
+}
+});
+document.getElementById(`sc-${id}`).textContent='0';
+document.getElementById(`pr-${id}`).style.width='0%';
+selected={};
+}
+
+function spawnConfetti(){
+const colors=['#f0b34b','#e94560','#6c5ce7','#2ecc71','#fff'];
+for(let i=0;i<50;i++){
+const el=document.createElement('div');
+el.className='confetti-piece';
+el.style.cssText=`left:${Math.random()*200-100}px;top:${Math.random()*200-100}px;background:${colors[i%colors.length]};width:${Math.random()*8+4}px;height:${Math.random()*8+4}px;border-radius:${Math.random()>0.5?'50%':'2px'};animation-delay:${Math.random()*.5}s;animation-duration:${1+Math.random()}s`;
+document.body.appendChild(el);
+setTimeout(()=>el.remove(),2000);
+}
+}
+
+function setupTabs(){
+document.querySelectorAll('.tab-btn').forEach(b=>{
+b.addEventListener('click',()=>{
+document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));
+document.querySelectorAll('.tab-content').forEach(x=>x.classList.remove('active'));
+b.classList.add('active');
+document.getElementById('tab-'+b.dataset.tab).classList.add('active');
+});
+});
+}
+</script>
+</body>
+</html>
